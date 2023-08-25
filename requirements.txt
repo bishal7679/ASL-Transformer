@@ -1,0 +1,10 @@
+torch==2.0.1
+gunicorn
+ffmpeg
+openai-whisper
+numpy
+mediapipe==0.8.9.1
+flask
+levenshtein
+regex==2023.6.3
+opencv-python
