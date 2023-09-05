@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: asltransformerapp
+  name: asltransformerapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: asltransformerapp
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: asltransformerapp
+    spec:
+      containers:
+      - image: bishal7679/asl-transformer:2.0
+        name: asltransformercontainer
+        ports:
+        - containerPort: 5000
+          protocol: TCP

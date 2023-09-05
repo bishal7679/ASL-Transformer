@@ -15,15 +15,16 @@ USER bishal
 # set up config option
 ENV FLASK_ENV=production
 
+# Add rest of the files
+COPY . /app
+
+WORKDIR /app
 # Avoid cache purge by adding requirements first
 ADD ./requirements.txt ./requirements.txt
 
 RUN pip install --no-cache-dir -r ./requirements.txt --user
 
-# Add rest of the files
-COPY . /app
 
-WORKDIR /app
 
 # start web server
 CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app", "--workers=5"]

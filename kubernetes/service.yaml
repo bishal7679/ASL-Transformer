@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: asltransformerapp-service
+  labels:
+    run: asltransformerapp
+spec:
+  type: NodePort
+  ports:
+  - port: 5000
+    targetPort: 5000
+    nodePort: 30002
+    protocol: TCP
+    name: http
+  - port: 443
+    protocol: TCP
+    name: https
+  selector:
+    app: asltransformerapp
+  sessionAffinity: ClientIP
