@@ -4,7 +4,7 @@
 ---
 ![rancher-asl-final](https://github.com/bishal7679/ASL-Transformer/assets/70086051/45739c7a-07b4-474f-a46c-fd1edb2ff617)
 
-This is an interactive Machine Learning Web App "ASL-Transformer" developed using Python. It will help the deaf persons to understand sign language through animation from audio or Transcripted Test
+This is an interactive Machine Learning Web App "ASL-Transformer" developed using Python. It will help the deaf persons to understand sign language through animation from audio or Transcripted Test 
 
 ![04-09-2023:22:09:04](https://github.com/bishal7679/ASL-Transformer/assets/70086051/86f1f9bf-037b-4223-a30f-d24abde7583e)
 
