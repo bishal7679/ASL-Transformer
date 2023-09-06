@@ -1,0 +1,75 @@
+name: Deploy to Amazon ECS
+
+on:
+  push:
+    branches: [docker-build]
+
+env:
+  AWS_REGION: us-east-1                   # set this to your preferred AWS region, e.g. us-west-1
+  ECS_SERVICE: asltransformer-cont-service          # set this to your Amazon ECS service name
+  ECS_CLUSTER: asltransformer-cluster                 # set this to your Amazon ECS cluster name
+  ECS_TASK_DEFINITION: asl-run-task-definition # set this to the path to your Amazon ECS task definition
+                                               # file, e.g. .aws/task-definition.json
+  CONTAINER_NAME: asltransformer-cont          # set this to the name of the container in the
+                                               # containerDefinitions section of your task definition
+                                             
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }} # NEED TO SETUP IN GITHUB LATER
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # NEED TO SETUP IN GITHUB LATER
+        aws-region: ${{ env.AWS_REGION }}
+
+    - name: Check out the repo
+      uses: actions/checkout@v3
+      
+    - name: Log in to Docker Hub
+      uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+      with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      
+    - name: Extract metadata (tags, labels) for Docker
+      id: meta
+      uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+      with:
+          images: bishal7679/asl-transformer
+      
+    - name: Build and push Docker image
+      uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+      with:
+          context: .
+          file: ./Dockerfile
+          tags: bishal7679/asl-transformer:latest
+          push: true
+          labels: ${{ steps.meta.outputs.labels }}
+        
+    - name: Download task definition
+      run: |
+        aws ecs describe-task-definition --task-definition $ECS_TASK_DEFINITION --query taskDefinition > task-definition.json
+    - name: Fill in the new image ID in the Amazon ECS task definition
+      id: task-def
+      uses: aws-actions/amazon-ecs-render-task-definition@v1
+      with:
+        task-definition: ./task-definition.json
+        container-name: ${{ env.CONTAINER_NAME }}
+        image: ${{ steps.build-image.outputs.image }}
+
+    - name: Deploy Amazon ECS task definition
+      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+      with:
+        task-definition: ${{ steps.task-def.outputs.task-definition }}
+        service: ${{ env.ECS_SERVICE }}
+        cluster: ${{ env.ECS_CLUSTER }}
+        wait-for-service-stability: false
