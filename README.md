@@ -58,31 +58,123 @@ This is an interactive Machine Learning Web App "ASL-Transformer" developed usin
 
     * Clone the repository
         ```ruby
-          git clone https://github.com/bishal7679/ASL-Transformer.git
-  
+        git clone https://github.com/bishal7679/ASL-Transformer.git
         ```
     * Set up Python virtual environment
         ```ruby
-          python -m venv myenv
-
+        python -m venv myenv
         ```
     * Install required dependencies (`requirements.txt`)
     * Run the app.py file
         ```ruby
-          python app.py
+        python app.py
         ```
 
 # How-to Deployment 🏭
-  * Create the `Dockerfile` first
-    ```ruby
-      FROM python:3.9-slim-buster
-      WORKDIR /app
-      COPY . /app
-      WORKDIR /app
-      ADD ./requirements.txt ./requirements.txt
-      RUN pip install -r requirements.txt
-      EXPOSE 5000
-      ENV FLASK_APP=app.py
-      CMD ["flask", "run", "--host", "0.0.0.0"]
-    ```
+  * ### Containerization 🐳
+    * Create the `Dockerfile` first
+      ```ruby
+        FROM python:3.9-slim-buster
+        WORKDIR /app
+        COPY . /app
+        WORKDIR /app
+        ADD ./requirements.txt ./requirements.txt
+        RUN pip install -r requirements.txt
+        EXPOSE 5000
+        ENV FLASK_APP=app.py
+        CMD ["flask", "run", "--host", "0.0.0.0"]
+      ```
+      The Dockerfile tells the docker build command to:
+  
+        - start with the 'python:3.9-slim-buster' base image.
+        
+        - Set the working directory of container space and the copy the contents of the current directory (where the command is issued) to the '/app' directory in the image itself.
+        
+        - use '/app' as the working directory for subsequent instructions.
+        
+        - add `requirements.txt` to /app & install the Python packages as per the 'requirements.txt' file created earlier. (Avoid cache purge by adding requirements first)
+        
+        - expose the container port 5000
+        
+        - run the 'app.py' script.
+     
+    * Build the Docker image
+        ```ruby
+        docker build -t asl-transformer:latest .
+        ```
+
+    * Tag the image to your Docker Hub account.
+        ```ruby
+        docker tag asl-transformer:latest <USERNAME>/asl-transformer:latest
+        ```
+        Replace <USERNAME> with your Docker Hub user name.
+
+    * Then Push the image to your Docker Hub account.
+
+       - This will make it easier to deploy to your Kubernetes cluster.
+        ```ruby
+        sudo docker push <USERNAME>/asl-transformer:latest
+        ```
+        > **Note**:- make sure to `docker login` first to push the image
+    * Run the container.
+        ```ruby
+        docker run -p 5000:5000 asl-transformer:latest
+        ```
+        Open your Web browser to `http://localhost:5000/` and verify that you can access the application.
+
+  * ### kubernetes manifests ☸
+    * Go to the /kubernetes folder and apply two manifests (make sure to install kubectl)
+      - `namespace.yaml`
+      - `deployment.yaml`
+      - `service.yaml`
+    * Create a namespace named "healthcare"
+      ```ruby
+      kubectl apply -f namespace.yaml
+      ```
+      ```ruby
+      kubectl apply -f deployment.yaml
+      ```
+      ```ruby
+      kubectl apply -f service.yaml
+      ```
+
+    * Check whether all the pods are running in the `healthcare` namespace.
+      ```ruby
+      kubectl get pods -n healthcare
+      ```
+      - Result:- 
+      ```ruby
+      NAME                              READY   STATUS    RESTARTS   AGE
+      asl-transformer-5df6b686c-dt69m   1/1     Running   0          9m31s
+      asl-transformer-5df6b686c-pv288   1/1     Running   0          9m31s
+      ```
+      ![08-09-2023:00:03:58](https://github.com/bishal7679/ASL-Transformer/assets/70086051/5b2caf00-87cc-401b-b459-c76f69342234)
+
+    * Get all the information of the running resources `healthcare` namespace.
+      ```ruby
+      kubectl get all -n healthcare
+      ```
+      
+      ```ruby
+      NAME                                  READY   STATUS    RESTARTS   AGE
+      pod/asl-transformer-5df6b686c-dt69m   1/1     Running   0          18m
+      pod/asl-transformer-5df6b686c-pv288   1/1     Running   0          6d
+      
+      NAME                               TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+      service/asl-transformer            ClusterIP   10.43.192.253   <none>        5000/TCP         6d1h
+      service/asl-transformer-nodeport   NodePort    10.43.45.17     <none>        5000:30002/TCP   6d1h
+      service/kubernetes                 ClusterIP   10.43.0.1       <none>        443/TCP          123d
+      
+      NAME                              READY   UP-TO-DATE   AVAILABLE   AGE
+      deployment.apps/asl-transformer   2/2     2            2           6d1h
+      
+      NAME                                         DESIRED   CURRENT   READY   AGE
+      replicaset.apps/asl-transformer-5df6b686c    2         2         2       6d
+      ```
+      ![08-09-2023:00:17:49](https://github.com/bishal7679/ASL-Transformer/assets/70086051/3990f106-550b-4f25-a7f8-2b8b14dd5807)
+
+
+      
+
+  
 
