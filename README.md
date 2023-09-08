@@ -98,7 +98,7 @@ This is an interactive Machine Learning Web App "ASL-Transformer" developed usin
         
         - run the 'app.py' script.
      
-    * Build the Docker image
+    * Build the Docker image (Make sure you are in the directory where Dockerfile resides)
         ```ruby
         docker build -t asl-transformer:latest .
         ```
