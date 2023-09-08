@@ -177,6 +177,44 @@ This is an interactive Machine Learning Web App "ASL-Transformer" developed usin
 
       ![04-09-2023:22:10:50](https://github.com/bishal7679/ASL-Transformer/assets/70086051/69bb5358-f03c-412f-965b-6834f3827aa3)
 
+  * ### AWS ECS Deployment
+    [![aws](https://cdn3.emoji.gg/emojis/8708-aws.png)](https://emoji.gg/emoji/8708-aws)
+
+    - ECS cluster
+
+      ![06-09-2023:22:46:49](https://github.com/bishal7679/ASL-Transformer/assets/70086051/15a11769-b108-4725-979f-aaa5faa36bf6)
+
+    - Accessing the application by assigning a LoadBalancer
+      
+      ![06-09-2023:22:48:14](https://github.com/bishal7679/ASL-Transformer/assets/70086051/b6addeff-a9c1-43bf-a838-1ab61532e8ef)
+
+    - App is finally up and running on AWS🔥
+
+      ![06-09-2023:22:44:16](https://github.com/bishal7679/ASL-Transformer/assets/70086051/75405e0f-9d6e-43f1-a3ab-7806160b30f7)
+
+# What I learned 🔖
+  * How to use OpenAI's Whisper API to convert speech to text
+  * Using Python scripts to convert the .txt file into a list of unique strings
+  * Using Google's MediaPipe Hand Landmarker to retried the coordinates of each hand
+  * Using the ASL Dictionary to map each word to an array of coordinates
+  * Using three.js to animate the set of points
+  * Using HTML, CSS, JS, and Git to create a website and repository
+  * Deployment using aws, using kubernetes manifests and Github Action for CI/CD etc.
+
+# What's next for ASL-Transformer ⏭️
+  * Introducing sliders for user-controlled animation speed
+  * Enhancing the model with more human-like hand movements
+  * Developing a reverse translation function from ASL to English via computer recognition and Machine Learning
+  * Exploring commercial applications such as transcribing university lectures for deaf or hard-of-hearing students, and providing TV show captioning
+  * Enthusiastically looking forward to the future potential of ASL-Transformer 👋
+
+# Contribution Guidelines 📖
+  Please refer to contribution guide if you wish to contribute to the project 😄
+
+# ❤️ Show your support
+  Give a ⭐ if this project helped you, Happy learning!
+
+
 
 
       
