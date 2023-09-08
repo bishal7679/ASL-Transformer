@@ -173,6 +173,11 @@ This is an interactive Machine Learning Web App "ASL-Transformer" developed usin
       ```
       ![08-09-2023:00:17:49](https://github.com/bishal7679/ASL-Transformer/assets/70086051/3990f106-550b-4f25-a7f8-2b8b14dd5807)
 
+    * Now you can access the noreport: 30002 service where app is running
+
+      ![04-09-2023:22:10:50](https://github.com/bishal7679/ASL-Transformer/assets/70086051/69bb5358-f03c-412f-965b-6834f3827aa3)
+
+
 
       
 
