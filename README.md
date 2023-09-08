@@ -3,11 +3,12 @@
 
 # Transforming ASL to sign Language animation ☀️
 ---
-![rancher-asl-final](https://github.com/bishal7679/ASL-Transformer/assets/70086051/45739c7a-07b4-474f-a46c-fd1edb2ff617)
+![rancher-asl-final](https://github.com/bishal7679/ASL-Transformer/assets/70086051/82273ac1-e7be-4115-9326-c2887591e2ca)
 
 This is an interactive Machine Learning Web App "ASL-Transformer" developed using Python. It will help the deaf persons to understand sign language through animation from audio or Transcripted Test.
 
-![04-09-2023:22:09:04](https://github.com/bishal7679/ASL-Transformer/assets/70086051/86f1f9bf-037b-4223-a30f-d24abde7583e)
+![04-09-2023:22:09:14](https://github.com/bishal7679/ASL-Transformer/assets/70086051/397f0106-0284-4067-a555-3d4a43d9244f)
+
 
 # Project Overview 🤯
   - This program has three main steps:
@@ -31,7 +32,8 @@ This is an interactive Machine Learning Web App "ASL-Transformer" developed usin
   * Using Rancher, k3s, k8s, AWS ECS Cluster for Deployment
   * Github Action for CI/CD pipeline
 
-      ![Abstract letter N modern logo icon design concept](https://github.com/bishal7679/ASL-Transformer/assets/70086051/a47ba5df-a099-4cf1-a88f-baafe9c9f921)
+      ![Abstract letter N modern logo icon design concept](https://github.com/bishal7679/ASL-Transformer/assets/70086051/67c39700-1398-4b65-b434-c6c0637e2885)
+
 
 # Challenges ✨
   * Semantics: Not having the exact translation of every word in the ASL dictionary
@@ -149,7 +151,8 @@ This is an interactive Machine Learning Web App "ASL-Transformer" developed usin
       asl-transformer-5df6b686c-dt69m   1/1     Running   0          9m31s
       asl-transformer-5df6b686c-pv288   1/1     Running   0          9m31s
       ```
-      ![08-09-2023:00:03:58](https://github.com/bishal7679/ASL-Transformer/assets/70086051/5b2caf00-87cc-401b-b459-c76f69342234)
+      ![08-09-2023:00:03:58](https://github.com/bishal7679/ASL-Transformer/assets/70086051/0473d64f-030c-4464-ae02-baea190ff2a3)
+
 
     * Get all the information of the running resources `healthcare` namespace.
       ```ruby
@@ -172,26 +175,30 @@ This is an interactive Machine Learning Web App "ASL-Transformer" developed usin
       NAME                                         DESIRED   CURRENT   READY   AGE
       replicaset.apps/asl-transformer-5df6b686c    2         2         2       6d
       ```
-      ![08-09-2023:00:17:49](https://github.com/bishal7679/ASL-Transformer/assets/70086051/3990f106-550b-4f25-a7f8-2b8b14dd5807)
+      ![08-09-2023:00:17:49](https://github.com/bishal7679/ASL-Transformer/assets/70086051/e3041b06-62ba-4bfb-a5ac-d0fda4fef733)
 
-    * Now you can access the noreport: 30002 service where app is running
+    * Now you can access the nodeport: 30002 service
 
-      ![04-09-2023:22:10:50](https://github.com/bishal7679/ASL-Transformer/assets/70086051/69bb5358-f03c-412f-965b-6834f3827aa3)
+      ![04-09-2023:22:10:50](https://github.com/bishal7679/ASL-Transformer/assets/70086051/8e2b274f-5957-4ce9-b0c4-ef0b7f524565)
+
 
   * ### AWS ECS Deployment
     [![aws](https://cdn3.emoji.gg/emojis/8708-aws.png)](https://emoji.gg/emoji/8708-aws)
 
     - ECS cluster
 
-      ![06-09-2023:22:46:49](https://github.com/bishal7679/ASL-Transformer/assets/70086051/15a11769-b108-4725-979f-aaa5faa36bf6)
+      ![06-09-2023:22:46:49](https://github.com/bishal7679/ASL-Transformer/assets/70086051/1bddbd3f-99f1-4a01-bef4-db201ef36386)
+
 
     - Accessing the application by assigning a LoadBalancer
       
-      ![06-09-2023:22:48:14](https://github.com/bishal7679/ASL-Transformer/assets/70086051/b6addeff-a9c1-43bf-a838-1ab61532e8ef)
+      ![06-09-2023:22:48:14](https://github.com/bishal7679/ASL-Transformer/assets/70086051/dec78c6a-4f47-4cbd-9b1c-c4443eed9391)
+
 
     - App is finally up and running on AWS🔥
 
-      ![06-09-2023:22:44:16](https://github.com/bishal7679/ASL-Transformer/assets/70086051/75405e0f-9d6e-43f1-a3ab-7806160b30f7)
+      ![06-09-2023:22:44:16](https://github.com/bishal7679/ASL-Transformer/assets/70086051/1dbc2269-1014-4ac2-919d-e622f46fc41e)
+
 
 # What I learned 🔖
   * How to use OpenAI's Whisper API to convert speech to text
