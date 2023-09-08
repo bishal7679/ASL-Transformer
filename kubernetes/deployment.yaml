@@ -18,7 +18,7 @@ spec:
         app: asltransformerapp
     spec:
       containers:
-      - image: bishal7679/asl-transformer:2.0
+      - image: bishal7679/asl-transformer:latest
         name: asltransformercontainer
         ports:
         - containerPort: 5000
