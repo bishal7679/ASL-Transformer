@@ -5,7 +5,9 @@ on:
     branches: [ "main" ]
 
 env:
-  AWS_REGION: us-east-1                   # set this to your preferred AWS region, e.g. us-west-1
+  AWS_REGION: us-east-1  # set this to your preferred AWS region, e.g. us-west-1
+  DOCKER_REGISTRY: bishal7679
+  DOCKER_REPOSITORY: asl-transformer
   ECS_SERVICE: asltransformer-cont-service          # set this to your Amazon ECS service name
   ECS_CLUSTER: asltransformer-cluster                 # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: asl-run-task-definition # set this to the path to your Amazon ECS task definition
@@ -30,9 +32,6 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }} # NEED TO SETUP IN GITHUB LATER
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # NEED TO SETUP IN GITHUB LATER
         aws-region: ${{ env.AWS_REGION }}
-
-    - name: Check out the repo
-      uses: actions/checkout@v3
       
     - name: Log in to Docker Hub
       uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
@@ -54,6 +53,13 @@ jobs:
           tags: bishal7679/asl-transformer:latest
           push: true
           labels: ${{ steps.meta.outputs.labels }}
+
+    - name: Get the build-image output
+      id: build-image-output
+      env:
+        IMAGE_TAG: latest
+      run:
+        echo "image=$DOCKER_REGISTRY/$DOCKER_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
         
     - name: Download task definition
       run: |
@@ -64,7 +70,7 @@ jobs:
       with:
         task-definition: ./task-definition.json
         container-name: ${{ env.CONTAINER_NAME }}
-        image: ${{ steps.build-image.outputs.image }}
+        image: ${{ steps.build-image-output.outputs.image }}
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
