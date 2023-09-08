@@ -1,4 +1,5 @@
-
+[![Deploy to AWS ECS](https://github.com/bishal7679/ASL-Transformer/actions/workflows/aws.yml/badge.svg?branch=main)](https://github.com/bishal7679/ASL-Transformer/actions/workflows/aws.yml/badge.svg?branch=main)
+[![Docker Build](https://github.com/bishal7679/ASL-Transformer/actions/workflows/docker-image.yml/badge.svg?branch=docker-build)](https://github.com/bishal7679/ASL-Transformer/actions/workflows/docker-image.yml/badge.svg?branch=docker-build)
 
 # Transforming ASL to sign Language animation ☀️
 ---
